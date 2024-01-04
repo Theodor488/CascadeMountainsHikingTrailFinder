@@ -16,6 +16,7 @@ namespace CascadeMountainsHikingTrailFinder
             Unknown
         }
 
+        // test comment
         public static string[] GetCoords()
         {
             Console.WriteLine("____Cascade Mountains Hiking Trail Finder____\n");
