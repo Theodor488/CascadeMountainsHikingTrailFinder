@@ -15,7 +15,7 @@ namespace CascadeMountainsHikingTrailFinder
             SouthernCascades,
             Unknown
         }
-        // test
+
         public static string[] GetCoords()
         {
             Console.WriteLine("____Cascade Mountains Hiking Trail Finder____\n");
