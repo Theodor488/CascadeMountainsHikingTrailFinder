@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static CascadeMountainsHikingTrailFinder.UserActions;
 
 namespace CascadeMountainsHikingTrailFinder
 {
@@ -16,18 +17,86 @@ namespace CascadeMountainsHikingTrailFinder
             Unknown
         }
 
-        // test comment
-        public static string[] GetCoords()
+        public static string GetLocation()
         {
             Console.WriteLine("____Cascade Mountains Hiking Trail Finder____\n");
             Console.WriteLine("Choose a location: 1.Northern Cascades, 2.Central Cascades, 3.Southern Cascades");
             string locationChoice = Console.ReadLine();
-
-            string[] coords = ChooseLocation(locationChoice);
-            return coords;
+            string location = ChooseLocation(locationChoice);
+            return location;
         }
 
-        public static string[] ChooseLocation(string locationChoice)
+        public static string ChooseMaxResults()
+        {
+            Console.WriteLine("Choose max results: ");
+            string maxResultsChoice = Console.ReadLine();
+            bool keepAsking = true;
+
+            try
+            {
+                while (keepAsking)
+                {
+                    if (int.TryParse(maxResultsChoice, out int maxResults))
+                    {
+                        if (maxResults < 0)
+                        {
+                            Console.WriteLine($"{maxResults} is invalid. Choose a positive number.");
+                        }
+                        else
+                        {
+                            keepAsking = false;
+                        }
+                    }
+                }
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid Input. Please enter a number.");
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine("the number is too large.");
+            }
+
+            return maxResultsChoice;
+        }
+
+        public static string ChooseLength()
+        {
+            Console.WriteLine("Choose max length: ");
+            string maxLengthChoice = Console.ReadLine();
+            bool keepAsking = true;
+
+            try
+            {
+                while (keepAsking)
+                {
+                    if (int.TryParse(maxLengthChoice, out int maxLength))
+                    {
+                        if (maxLength < 0)
+                        {
+                            Console.WriteLine($"{maxLength} is invalid. Choose a positive number.");
+                        }
+                        else
+                        {
+                            keepAsking = false;
+                        }
+                    }
+                }
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid Input. Please enter a number.");
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine("the number is too large.");
+            }
+
+            return maxLengthChoice;
+        }
+
+        public static string ChooseLocation(string locationChoice)
         {
             Locations location = Locations.Unknown;
             bool askForLocation = true;
@@ -55,37 +124,7 @@ namespace CascadeMountainsHikingTrailFinder
                 }
             }
 
-            string[] coords = AssignCoords(location);
-
-            return coords;
-        }
-
-        public static string[] AssignCoords(Locations location)
-        {
-            string[] coords = new string[2];
-
-            if (location == Locations.NorthernCascades)
-            {
-                coords[0] = "48.73"; // lat
-                coords[1] = "-121.11"; // lon
-            }
-            else if (location == Locations.CentralCascades)
-            {
-                coords[0] = "47.71"; // lat
-                coords[1] = "-121.31"; // lon
-            }
-            else if (location == Locations.SouthernCascades) 
-            {
-                coords[0] = "46.22"; // lat
-                coords[1] = "-121.62"; // lon 
-            }
-            else
-            {
-                coords[0] = "0"; // lat
-                coords[1] = "0"; // lon 
-            }
-
-            return coords;
+            return location.ToString();
         }
     }
 }

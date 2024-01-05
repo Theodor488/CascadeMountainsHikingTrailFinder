@@ -9,7 +9,7 @@ namespace CascadeMountainsHikingTrailFinder
 {
     public class TrailDataManager
     {
-        public async Task<List<Hike>> GetTrailsAsync(HttpRequestMessage request)
+        public async Task<List<Hike>> GetTrailsAsync(HttpRequestMessage request, int maxTrailLength, int maxResults)
         {
             using (HttpClient client = new HttpClient()) 
             {
@@ -24,7 +24,13 @@ namespace CascadeMountainsHikingTrailFinder
                 // Prints basic trail info
                 foreach (var hike in hikesList)
                 {
-                    Console.WriteLine($"{hike.Name}: {hike.Activities.Hiking.Length} miles");
+                    int hikeLength = int.Parse(hike.Activities.Hiking.Length);
+
+                    if (hikeLength < maxTrailLength && maxResults > 0)
+                    {
+                        Console.WriteLine($"\n{hike.Name}: {hike.Activities.Hiking.Length} miles \nDescription: {hike.Description}\n\n");
+                        maxResults--;
+                    }
                 }
 
                 return hikesList;
