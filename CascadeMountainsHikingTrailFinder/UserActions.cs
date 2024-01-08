@@ -28,7 +28,7 @@ namespace CascadeMountainsHikingTrailFinder
 
         public static string ChooseMaxResults()
         {
-            Console.WriteLine("Choose max results: ");
+            Console.WriteLine("Choose max results (max 100): ");
             string maxResultsChoice = Console.ReadLine();
             bool keepAsking = true;
 
